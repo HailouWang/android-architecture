@@ -33,6 +33,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Listens to user actions from the UI ({@link TasksFragment}), retrieves the data and updates the
  * UI as required.
+ * [2017年11月07日]wanghailu：从用户界面监听用户操作，接收数据并更新相应的用户界面。
  */
 public class TasksPresenter implements TasksContract.Presenter {
 
@@ -59,6 +60,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void result(int requestCode, int resultCode) {
         // If a task was successfully added, show snackbar
+        //[2017年11月07日]wanghailu：如果task添加成功，显示snackbar
         if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode && Activity.RESULT_OK == resultCode) {
             mTasksView.showSuccessfullySavedMessage();
         }
@@ -67,6 +69,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void loadTasks(boolean forceUpdate) {
         // Simplification for sample: a network reload will be forced on first load.
+        //[2017年11月07日]wanghailu：第一次会进行一次网络数据加载。
         loadTasks(forceUpdate || mFirstLoad, true);
         mFirstLoad = false;
     }
@@ -85,6 +88,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
         // The network request might be handled in a different thread so make sure Espresso knows
         // that the app is busy until the response is handled.
+        //[2017年11月07日]wanghailu：网络请求可能会在不同的线程中被处理，所以确保Espresso知道应用程序处于忙碌中，直到应用程序处理了响应。
         EspressoIdlingResource.increment(); // App is busy until further notice
 
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
@@ -95,11 +99,14 @@ public class TasksPresenter implements TasksContract.Presenter {
                 // This callback may be called twice, once for the cache and once for loading
                 // the data from the server API, so we check before decrementing, otherwise
                 // it throws "Counter has been corrupted!" exception.
+                //[2017年11月07日]wanghailu：回调可能会执行两次。一次来自缓存，一次来自请求服务器API数据。故：我们在减量前进行检查，
+                //否则，可能会抛出"Counter has been corrupted!"异常。
                 if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
                     EspressoIdlingResource.decrement(); // Set app as idle.
                 }
 
                 // We filter the tasks based on the requestType
+                //[2017年11月07日]wanghailu：根据Filter过滤加载的Ｔａｓｋｓ
                 for (Task task : tasks) {
                     switch (mCurrentFiltering) {
                         case ALL_TASKS:
@@ -121,6 +128,7 @@ public class TasksPresenter implements TasksContract.Presenter {
                     }
                 }
                 // The view may not be able to handle UI updates anymore
+                //[2017年11月07日]wanghailu：UI界面不在能够处理更新
                 if (!mTasksView.isActive()) {
                     return;
                 }
@@ -145,8 +153,10 @@ public class TasksPresenter implements TasksContract.Presenter {
     private void processTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             // Show a message indicating there are no tasks for that filter type.
+            //[2017年11月07日]wanghailu：UI界面显示“there are no tasks for that filter type.”
             processEmptyTasks();
         } else {
+            //[2017年11月07日]wanghailu：UI界面展示Tasks列表，展示FilterLabel。
             // Show the list of tasks
             mTasksView.showTasks(tasks);
             // Set the filter label's text.
@@ -218,6 +228,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     /**
      * Sets the current task filtering type.
+     * //[2017年11月07日]wanghailu：设定当前Filter类型
      *
      * @param requestType Can be {@link TasksFilterType#ALL_TASKS},
      *                    {@link TasksFilterType#COMPLETED_TASKS}, or

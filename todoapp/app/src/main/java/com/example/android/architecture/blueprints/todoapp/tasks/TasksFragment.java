@@ -51,6 +51,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Display a grid of {@link Task}s. User can choose to view all, active or completed tasks.
+ * //[2017年11月07日]wanghailu：将Tasks以列表展示。用户可以选择并浏览全部，浏览进行中，浏览已完成的Tasks。
  */
 public class TasksFragment extends Fragment implements TasksContract.View {
 
@@ -107,12 +108,14 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
 
         // Set up tasks view
+        //[2017年11月07日]wanghailu：初始化Tasks视图
         ListView listView = (ListView) root.findViewById(R.id.tasks_list);
         listView.setAdapter(mListAdapter);
         mFilteringLabelView = (TextView) root.findViewById(R.id.filteringLabel);
         mTasksView = (LinearLayout) root.findViewById(R.id.tasksLL);
 
         // Set up  no tasks view
+        //[2017年11月07日]wanghailu：初始化无Tasks视图
         mNoTasksView = root.findViewById(R.id.noTasks);
         mNoTaskIcon = (ImageView) root.findViewById(R.id.noTasksIcon);
         mNoTaskMainView = (TextView) root.findViewById(R.id.noTasksMain);
@@ -137,6 +140,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         });
 
         // Set up progress indicator
+        //[2017年11月07日]wanghailu：初始化progress指示
         final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
                 (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(

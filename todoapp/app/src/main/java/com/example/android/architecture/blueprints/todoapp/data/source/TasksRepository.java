@@ -35,6 +35,8 @@ import java.util.Map;
  * For simplicity, this implements a dumb synchronisation between locally persisted data and data
  * obtained from the server, by using the remote data source only if the local database doesn't
  * exist or is empty.
+ *
+ * [2017年11月07日]wanghailu：从缓存加载数据的具体实现
  */
 public class TasksRepository implements TasksDataSource {
 
