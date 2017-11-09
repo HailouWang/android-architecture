@@ -36,7 +36,8 @@ import java.util.Map;
  * obtained from the server, by using the remote data source only if the local database doesn't
  * exist or is empty.
  *
- * [2017年11月07日]wanghailu：从缓存加载数据的具体实现
+ * [2017年11月07日]wanghailu：从缓存加载数据的具体实现.为了简单起见，实现了本地和服务器之间的同步。
+ * 远程数据当在本地数据库不存在或者为空时才会使用。
  */
 public class TasksRepository implements TasksDataSource {
 
@@ -93,6 +94,11 @@ public class TasksRepository implements TasksDataSource {
      * <p>
      * Note: {@link LoadTasksCallback#onDataNotAvailable()} is fired if all data sources fail to
      * get the data.
+     *
+     * [2017年11月09日18:17:52]wanghailu：从Cache、本地数据源、网络数据源获取Tasks数据，
+     *
+     * 无论哪一种数据源最先可以提供数据。
+     *
      */
     @Override
     public void getTasks(@NonNull final LoadTasksCallback callback) {
@@ -106,9 +112,11 @@ public class TasksRepository implements TasksDataSource {
 
         if (mCacheIsDirty) {
             // If the cache is dirty we need to fetch new data from the network.
+            //[2017年11月08日20:25:10]如果cache是旧数据，我们需要从网络上拉取新数据
             getTasksFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available. If not, query the network.
+            //[2017年11月08日20:24:08]wanghailu：如果本地数据可用，搜索本地存储数据。如果不可用，搜索网络数据
             mTasksLocalDataSource.getTasks(new LoadTasksCallback() {
                 @Override
                 public void onTasksLoaded(List<Task> tasks) {
@@ -146,6 +154,7 @@ public class TasksRepository implements TasksDataSource {
         Task completedTask = new Task(task.getTitle(), task.getDescription(), task.getId(), true);
 
         // Do in memory cache update to keep the app UI up to date
+        //[2017年11月08日20:21:18]wanghailu：内存缓存，以保持app更新
         if (mCachedTasks == null) {
             mCachedTasks = new LinkedHashMap<>();
         }

@@ -20,6 +20,7 @@ import android.support.test.espresso.IdlingResource;
 
 /**
  * Contains a static reference to {@link IdlingResource}, only available in the 'mock' build type.
+ * [2017年11月08日19:50:46]wanghailu：建立一个静态引用到IdlingResource，仅仅会在'mock'编译版本中使能。
  */
 public class EspressoIdlingResource {
 

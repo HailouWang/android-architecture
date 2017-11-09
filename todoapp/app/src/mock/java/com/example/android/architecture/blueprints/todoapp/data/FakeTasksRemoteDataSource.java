@@ -28,6 +28,7 @@ import java.util.Map;
 
 /**
  * Implementation of a remote data source with static access to the data for easy testing.
+ * [2017年11月07日]wanghailu：远程数据源的具体实现，为便于测试，实现了静态数据访问
  */
 public class FakeTasksRemoteDataSource implements TasksDataSource {
 

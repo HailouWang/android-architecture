@@ -29,6 +29,12 @@ import java.util.List;
  * methods to inform the user of network/database errors or successful operations.
  * For example, when a new task is created, it's synchronously stored in cache but usually every
  * operation on database or network should be executed in a different thread.
+ *
+ * [2017年11月07日]wanghailu：访问Tasks数据的主要切入点。
+ * 为了简单起见，考虑到添加回调给其他方法，用于通知用户，网络或者本地数据库的错误或者成功的操作，目前只有getTasks和getTask有回调。
+ *
+ * 例如：当一个新的Task创建了，它将同步存储到缓存，但是通常，每一个数据库或者网络的操作，应该在不同的线程上被执行。
+ *
  */
 public interface TasksDataSource {
 

@@ -25,6 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This provides methods to help Activities load their UI.
+ * [2017年11月08日20:16:05]wanghailu：提供方法帮助Activities加载UI
  */
 public class ActivityUtils {
 

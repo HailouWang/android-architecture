@@ -26,6 +26,8 @@ import java.util.UUID;
 
 /**
  * Immutable model class for a Task.
+ *
+ * [2017年11月08日20:27:38]wanghailu：不可变的任务Model
  */
 public final class Task {
 
@@ -42,6 +44,7 @@ public final class Task {
 
     /**
      * Use this constructor to create a new active Task.
+     * [2017年11月09日14:10:11]wanghailu：使用此构造，创建一个使能的任务。
      *
      * @param title       title of the task
      * @param description description of the task

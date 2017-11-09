@@ -322,6 +322,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     public void showTaskDetailsUi(String taskId) {
         // in it's own Activity, since it makes more sense that way and it gives us the flexibility
         // to show some Intent stubbing.
+        //[2017年11月09日18:02:43]wanghailu：在它自己的Activity中，因为这样更有意义，同时还给了我们灵活性去显示Intent的来源区域。
         Intent intent = new Intent(getContext(), TaskDetailActivity.class);
         intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
         startActivity(intent);

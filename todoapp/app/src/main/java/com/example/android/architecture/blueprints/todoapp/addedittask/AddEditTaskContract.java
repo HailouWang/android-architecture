@@ -21,6 +21,7 @@ import com.example.android.architecture.blueprints.todoapp.BaseView;
 
 /**
  * This specifies the contract between the view and the presenter.
+ * [2017年11月09日15:02:26]wanghailu：View和Presenter的连接器
  */
 public interface AddEditTaskContract {
 

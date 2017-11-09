@@ -34,6 +34,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Main UI for the add task screen. Users can enter a task title and description.
+ * [2017年11月09日15:02:50]wanghailu：添加Task的主线程，用户可以输入Task的title和description
  */
 public class AddEditTaskFragment extends Fragment implements AddEditTaskContract.View {
 

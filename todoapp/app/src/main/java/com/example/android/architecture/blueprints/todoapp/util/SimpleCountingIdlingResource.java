@@ -30,6 +30,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <p>
  * This class can then be used to wrap up operations that while in progress should block tests from
  * accessing the UI.
+ * [2017年11月08日19:55:31]wanghailu：简单的计数器实现，通过包含一个内部的计数器来决定 是否空闲。
+ *
+ * 当计数器为0时，被认为是空闲。当不为0时，不为idle。这和Semaphore比较相像。
+ *
+ * 这个类可以用来包装一些操作，这些操作是否可以用来用来阻止测试访问UI.
  */
 public final class SimpleCountingIdlingResource implements IdlingResource {
 
@@ -66,6 +71,7 @@ public final class SimpleCountingIdlingResource implements IdlingResource {
 
     /**
      * Increments the count of in-flight transactions to the resource being monitored.
+     * [2017年11月08日20:03:08]wanghailu：为正在监控的资源，增加计数
      */
     public void increment() {
         counter.getAndIncrement();
@@ -77,6 +83,10 @@ public final class SimpleCountingIdlingResource implements IdlingResource {
      * If this operation results in the counter falling below 0 - an exception is raised.
      *
      * @throws IllegalStateException if the counter is below 0.
+     *
+     * [2017年11月08日20:15:05]wanghailu：为正在监控的资源，减少计数。
+     *
+     * 如果操作数小于0，抛出Exception。
      */
     public void decrement() {
         int counterVal = counter.decrementAndGet();

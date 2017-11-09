@@ -34,6 +34,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Concrete implementation of a data source as a db.
+ *[2017年11月08日]wanghailu：数据源的具体实现，形式为DB
  */
 public class TasksLocalDataSource implements TasksDataSource {
 
@@ -42,6 +43,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     private TasksDbHelper mDbHelper;
 
     // Prevent direct instantiation.
+    //[2017年11月08日]wanghailu：阻止直接实例化
     private TasksLocalDataSource(@NonNull Context context) {
         checkNotNull(context);
         mDbHelper = new TasksDbHelper(context);
@@ -57,6 +59,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     /**
      * Note: {@link LoadTasksCallback#onDataNotAvailable()} is fired if the database doesn't exist
      * or the table is empty.
+     * [2017年11月08日]wanghailu：当数据库不存在，或者数据表为空，则：onDataNotAvailable。
      */
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
@@ -93,6 +96,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
         if (tasks.isEmpty()) {
             // This will be called if the table is new or just empty.
+            //[2017年11月08日]wanghailu：数据表属于新初始化或者就是空的。
             callback.onDataNotAvailable();
         } else {
             callback.onTasksLoaded(tasks);
@@ -103,6 +107,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     /**
      * Note: {@link GetTaskCallback#onDataNotAvailable()} is fired if the {@link Task} isn't
      * found.
+     * [2017年11月08日]wanghailu：如果Task不存在，返回：onDataNotAvailable。
      */
     @Override
     public void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback) {
@@ -181,6 +186,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     public void completeTask(@NonNull String taskId) {
         // Not required for the local data source because the {@link TasksRepository} handles
         // converting from a {@code taskId} to a {@link task} using its cached data.
+        //[2017-11-08]wanghailu:不需要，因为TasksRepository使用缓存数据来从taskId转换为Task
     }
 
     @Override
@@ -202,6 +208,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     public void activateTask(@NonNull String taskId) {
         // Not required for the local data source because the {@link TasksRepository} handles
         // converting from a {@code taskId} to a {@link task} using its cached data.
+        //[2017年11月08日]wanghailu:不需要，因为TasksRepository使用缓存数据来从taskId转换为Task
     }
 
     @Override

@@ -29,6 +29,7 @@ import java.util.Map;
 
 /**
  * Implementation of the data source that adds a latency simulating network.
+ * [2017年11月08日19:24:41]wanghailu：模拟网络数据源实现
  */
 public class TasksRemoteDataSource implements TasksDataSource {
 
@@ -63,6 +64,8 @@ public class TasksRemoteDataSource implements TasksDataSource {
      * Note: {@link LoadTasksCallback#onDataNotAvailable()} is never fired. In a real remote data
      * source implementation, this would be fired if the server can't be contacted or the server
      * returns an error.
+     * [2017年11月08日19:28:02]wanghailu：onDataNotAvailable不会触发。在真实的网络数据源实现中，
+     * 当服务器无法连接或者服务器返回了一个错误。
      */
     @Override
     public void getTasks(final @NonNull LoadTasksCallback callback) {
@@ -80,12 +83,16 @@ public class TasksRemoteDataSource implements TasksDataSource {
      * Note: {@link GetTaskCallback#onDataNotAvailable()} is never fired. In a real remote data
      * source implementation, this would be fired if the server can't be contacted or the server
      * returns an error.
+     *
+     * [2017年11月08日19:31:03]wanghailu：onDataNotAvailable不会触发。在真实的网络数据源实现中，
+     * 当服务器无法连接或者服务器返回了一个错误。
      */
     @Override
     public void getTask(@NonNull String taskId, final @NonNull GetTaskCallback callback) {
         final Task task = TASKS_SERVICE_DATA.get(taskId);
 
         // Simulate network by delaying the execution.
+        //[2017年11月08日20:26:24]wanghailu：模拟网络操作，使用delay来执行
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

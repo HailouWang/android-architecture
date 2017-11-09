@@ -20,14 +20,17 @@ import android.provider.BaseColumns;
 
 /**
  * The contract used for the db to save the tasks locally.
+ * [2017年11月08日]wanghailu：数据库本地存储tasks的连接器
  */
 public final class TasksPersistenceContract {
 
     // To prevent someone from accidentally instantiating the contract class,
-    // give it an empty constructor.
+    // give it an empty constructor.阻止意外实例化，给出空实现
+    //[2017年11月08日19:23:07]wanghailu：
     private TasksPersistenceContract() {}
 
     /* Inner class that defines the table contents */
+    //[2017年11月08日19:23:56]wanghailu：内部类，用于声明数据库内容
     public static abstract class TaskEntry implements BaseColumns {
         public static final String TABLE_NAME = "tasks";
         public static final String COLUMN_NAME_ENTRY_ID = "entryid";

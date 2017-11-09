@@ -31,6 +31,7 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
 
 /**
  * Displays an add or edit task screen.
+ * [2017年11月09日15:00:36]wanghailu：显示添加或者编辑 任务界面
  */
 public class AddEditTaskActivity extends AppCompatActivity {
 

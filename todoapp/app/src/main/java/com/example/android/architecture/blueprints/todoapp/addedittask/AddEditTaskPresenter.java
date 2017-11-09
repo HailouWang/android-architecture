@@ -27,6 +27,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Listens to user actions from the UI ({@link AddEditTaskFragment}), retrieves the data and updates
  * the UI as required.
+ *
+ * [2017年11月09日16:56:33]wanghailu：监听界面用户操作，接受数据，更新用户所需要的UI更新。
  */
 public class AddEditTaskPresenter implements AddEditTaskContract.Presenter,
         TasksDataSource.GetTaskCallback {
